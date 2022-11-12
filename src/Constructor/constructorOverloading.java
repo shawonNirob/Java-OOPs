@@ -15,7 +15,7 @@ public class constructorOverloading{
         this.b = b;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         constructorOverloading call1 = new constructorOverloading();
         constructorOverloading call2 = new constructorOverloading(25);
         constructorOverloading call3 = new constructorOverloading(200,300);
@@ -23,6 +23,5 @@ public class constructorOverloading{
         System.out.println(call1.a+" "+call1.b);
         System.out.println(call2.a+" "+call2.b);
         System.out.println(call3.a+" "+call3.b);
-
     }
 }
