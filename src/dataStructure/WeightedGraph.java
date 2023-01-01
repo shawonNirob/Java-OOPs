@@ -45,6 +45,8 @@ public class WeightedGraph{
     }
 
     public static void main(String[] args) {
+        //for inner Static class (check Java Class)
+        //WeightedGraph.Graph graph = new WeightedGraph.Graph(6);
         Graph graph = new Graph(6);
         graph.addEdges(0,1,4);
         graph.addEdges(0,2,3);
