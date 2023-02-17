@@ -64,7 +64,6 @@ public class TopoSortBFS {
         }
         return false;
     }
-
     public static void main(String[] args) {
         TopoSortBFS graph = new TopoSortBFS(6);
 
@@ -76,6 +75,6 @@ public class TopoSortBFS {
         graph.addEdges(5,0);
         graph.addEdges(5,2);
 
-        System.out.println("Is there any cycle (T=yes/F=no): "+graph.cycleDetect(6));
+        System.out.println("Is there any cycle (T=Yes/F=No): "+graph.cycleDetect(6));
     }
 }
