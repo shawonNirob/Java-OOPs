@@ -13,34 +13,56 @@ public class TopoSortBFS {
         adj = new LinkedList[node];
         for(int i=0; i<node; i++){
             adj[i] = new LinkedList<>();
+
         }
     }
     public void addEdges(int source, int destination) {
         adj[source].add(destination);
     }
 
-    public ArrayList<Integer> topoBFS(int node){
-        int[] indegree = new int[node];
-        Queue<Integer> queue = new LinkedList<>();
-        ArrayList<Integer> list = new ArrayList<>();
+    /*
+    public boolean topoBFS(int node, int[] visited){
         for(int i=0; i<node; i++){
-            for(int n: adj[i]){
-                indegree[n]++;
+            if(visited[i]==0 && dfs(i, visited)) return true;
+        }
+        return false;
+    }
+    public boolean dfs(int node, int[] visited){
+        visited[node] = 1;
+        for(int n : adj[node]){
+            if(visited[n]==0 && dfs(n, visited)) {
+                return true;
+            }else if(visited[n]==1){
+                return true;
+            }else if(visited[n]==2){
+                return false;
             }
         }
+        visited[node] = 2;
+        return false;
+    }
+     */
+    public boolean cycleDetect(int node){
+        boolean[] visited = new boolean[node];
         for(int i=0; i<node; i++){
-            if(indegree[i]==0) queue.add(i);
+            boolean[] callStack = new boolean[node];
+            if(!visited[i] && dfs(i, visited, callStack)){
+                return true;
+            }
         }
+        return false;
+    }
 
-        while(!queue.isEmpty()){
-            int n = queue.poll();
-            list.add(n);
-            for(int i : adj[n]){
-                indegree[i]--;
-                if(indegree[i]==0) queue.add(i);
+    public boolean dfs(int node, boolean[] visited, boolean[] callStack){
+        visited[node] = true; callStack[node] = true;
+        for(int n: adj[node]){
+            if(visited[n]){
+                if(callStack[n]) return true;
+            }else if(dfs(n,visited,callStack)){
+                return true;
             }
         }
-        return list;
+        return false;
     }
 
     public static void main(String[] args) {
@@ -48,12 +70,12 @@ public class TopoSortBFS {
 
         graph.addEdges(2,3);
         graph.addEdges(3,1);
+        //graph.addEdges(3,5);
         graph.addEdges(4,0);
         graph.addEdges(4,1);
         graph.addEdges(5,0);
         graph.addEdges(5,2);
 
-        System.out.println(graph.topoBFS(6));
-
+        System.out.println("Is there any cycle (T=yes/F=no): "+graph.cycleDetect(6));
     }
 }
