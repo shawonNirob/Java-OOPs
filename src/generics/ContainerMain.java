@@ -2,13 +2,13 @@ package generics;
 
 public class ContainerMain {
     public static void main(String[] args) {
-       /* Container<Integer> container = new Container<>(5);
+       /*Container<Integer> container = new Container<>(5);
         container.addItem(50);
         container.addItem(60);
         container.addItem(70);
         container.addItem(80);
         container.addItem(90);
-        //container.addItem(6);
+        //container.addItem(60);
 
         System.out.println(container.getitem(4));
         container.printAll();
