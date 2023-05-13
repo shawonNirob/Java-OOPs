@@ -13,7 +13,7 @@ public class DijkstraAlgo{
         }
     }
 
-    public static class Graph {
+    private static class Graph {
         public int vertices;
         public LinkedList<Edges> adj[];
 
@@ -29,6 +29,10 @@ public class DijkstraAlgo{
         public void addEdges(int source, int destination, int weight) {
             Edges edges = new Edges(destination, weight);
             adj[source].add(edges);
+
+            //// For an undirected graph, add the reverse edge as well
+            edges = new Edges(source, weight);
+            adj[destination].add(edges);
         }
     }
 
@@ -49,18 +53,18 @@ public class DijkstraAlgo{
 
         while (!pq.isEmpty()){
             Edges curr = pq.poll();
-            int node = curr.destination;
+            int u= curr.destination;
             int dist = curr.weight;
 
-            if(dist > distance[node]) continue;
+            if(dist > distance[u]) continue; //execute at the last line of the pq in this graph
 
-            for(Edges neighbor : adj[node]){
-                int u = neighbor.destination;
-                int weight = neighbor.weight;
+            for(Edges neighbor : adj[u]){
+                int v = neighbor.destination;
+                int costUV = neighbor.weight;
 
-                if(distance[node] + weight < distance[u]){
-                    distance[u] = distance[node] + weight;
-                    pq.add(new Edges(u, weight));
+                if(distance[u] + costUV < distance[v]){
+                    distance[v] = distance[u] + costUV;
+                    pq.add(new Edges(v, distance[v]));
                 }
             }
         }
@@ -80,17 +84,10 @@ public class DijkstraAlgo{
 
         graph.addEdges(1, 2, 2);
         graph.addEdges(1, 4, 1);
-        graph.addEdges(2, 1, 2);
         graph.addEdges(2, 3, 4);
         graph.addEdges(2, 5, 5);
         graph.addEdges(3, 4, 3);
-        graph.addEdges(3, 2, 4);
         graph.addEdges(3, 5, 1);
-        graph.addEdges(4, 1, 1);
-        graph.addEdges(4, 3, 3);
-        graph.addEdges(5, 2, 5);
-        graph.addEdges(5, 3, 1);
-
 
         DijkstraAlgo dij = new DijkstraAlgo();
 
