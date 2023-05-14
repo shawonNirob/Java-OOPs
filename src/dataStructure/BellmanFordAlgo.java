@@ -3,19 +3,19 @@ package dataStructure;
 import java.util.*;
 
 public class BellmanFordAlgo{
-    public static class Edges {
+    public static class Edges{
         public int source;
         public int destination;
         public int weight;
 
-        public Edges(int source, int destination, int weight) {
+        public Edges(int source, int destination, int weight){
             this.source = source;
             this.destination = destination;
             this.weight = weight;
         }
     }
 
-    public static class Graph {
+    public static class Graph{
         public int vertices;
         public List<Edges> adj;
 
@@ -24,7 +24,7 @@ public class BellmanFordAlgo{
             adj= new ArrayList<>();
         }
 
-        public void addEdges(int source, int destination, int weight) {
+        public void addEdges(int source, int destination, int weight){
             Edges edge = new Edges(source, destination, weight);
             adj.add(edge);
 
@@ -45,7 +45,7 @@ public class BellmanFordAlgo{
         Arrays.fill(distance, Integer.MAX_VALUE);
         distance[source] = 0;
 
-        for(int i=1; i<V; i++){
+        for(int i=1; i<V-1; i++){
             for(Edges edges : adj){
                 int u = edges.source;
                 int v = edges.destination;
@@ -57,33 +57,27 @@ public class BellmanFordAlgo{
             }
         }
 
-        //For neative cycle detection nth time
-        for(int i=0; i<V; i++){
-            for(Edges edges : adj){
-                int u = edges.source;
-                int v = edges.destination;
-                int wt = edges.weight;
+        //For negative cycle detection nth time
+        for(Edges edges : adj){
+            int u = edges.source;
+            int v = edges.destination;
+            int wt = edges.weight;
 
-                if(distance[u] != Integer.MAX_VALUE && distance[u]+wt < distance[v]){
-                    System.out.println("Caution! There is a Negetive Cycle");
-                }
+            if(distance[u] != Integer.MAX_VALUE && distance[u]+wt < distance[v]){
+                System.out.println("Caution! There is a Negative Cycle");
             }
         }
-
         return distance;
     }
+
     public static void main(String[] args){
-        Graph graph = new Graph(6);
+        Graph graph = new Graph(4);
 
-        graph.addEdges(0, 1, 5);
-        graph.addEdges(1, 2, -2);
-        graph.addEdges(1, 5, -3);
-        graph.addEdges(2, 4, 3);
-        graph.addEdges(3, 4, -2);
-        graph.addEdges(3, 2, 6);
-        graph.addEdges(5, 3, 1);
-
-
+        graph.addEdges(3, 2, -10);
+        graph.addEdges(4, 3, 3);
+        graph.addEdges(1, 4, 5);
+        graph.addEdges(1, 2, 4);
+        graph.addEdges(2, 4, 5);
 
         BellmanFordAlgo algo = new BellmanFordAlgo();
 
@@ -91,9 +85,10 @@ public class BellmanFordAlgo{
         System.out.println();
 
 
-        int[] distance = algo.bellmanFord(6, graph.adj, 0);
+        int[] distance = algo.bellmanFord(5, graph.adj, 1);
         for(int i=0; i< distance.length; i++){
-            System.out.println("distance from 0 to "+i+" is: "+distance[i]);
+            System.out.println("distance from 1 to "+i+" is: "+distance[i]);
         }
     }
+
 }
