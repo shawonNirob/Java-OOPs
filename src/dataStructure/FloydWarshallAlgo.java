@@ -78,7 +78,7 @@ public class FloydWarshallAlgo{
         graph.addEdges(2,1,8);
         graph.addEdges(2,3,2);
         graph.addEdges(3,4,1);
-        graph.addEdges(3,1,5);
+        graph.addEdges(3,1,-6);
         graph.addEdges(1,4,7);
         graph.addEdges(4,1,2);
 
@@ -100,7 +100,5 @@ public class FloydWarshallAlgo{
             }
             System.out.println();
         }
-
     }
-
 }
