@@ -53,7 +53,7 @@ public class PrimsAlgo{
         int totalCost = 0;
         pq.add(new Edges(-1,0, 0));
 
-        while(!pq.isEmpty()) {
+        while(!pq.isEmpty()){
             Edges edge = pq.poll();
             int node = edge.destination;
             int weight = edge.weight;
