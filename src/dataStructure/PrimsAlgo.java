@@ -46,7 +46,7 @@ public class PrimsAlgo{
         }
     }
 
-    public int primMST(int source,LinkedList<Edges> adj[]){
+    public int primMST(int source, LinkedList<Edges> adj[]){
         boolean[] visited = new boolean[adj.length];
         parrent = new int[adj.length];
         PriorityQueue<Edges> pq = new PriorityQueue<>(Comparator.comparingInt(Edges -> Edges.weight));
