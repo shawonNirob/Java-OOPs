@@ -1,11 +1,12 @@
 package dataStructure;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ArticulationPoint {
+public class BridgeTarjansAlgo {
     private static int time; //to keep track of discovery time
     public static class Edges {
         public int destination;
@@ -47,78 +48,79 @@ public class ArticulationPoint {
             }
         }
     }
-    public void findArticulationPoints(LinkedList<Edges> adj[], int node, int parent, boolean[] visited, int[] disc, int[] low, boolean[] ap){
-        int children = 0;
+    public void dfs(LinkedList<Edges> adj[], int parent, int node, boolean[] visited, int[] disc, int[] low, List<Edges> result){
         visited[node] = true;
         disc[node] = low[node] = time;
         time++;
 
-        for(Edges edge : adj[node]){
+        for(Edges edge: adj[node]){
             int u = edge.destination;
 
-            if(parent == u) continue;
-            if (!visited[u]){
-                findArticulationPoints(adj, u, node, visited, disc, low, ap);
+            if(u == parent) continue;
+            if(!visited[u]){
+                dfs(adj, node, u, visited, disc, low, result);
 
                 low[node] = Math.min(low[node], low[u]);
-                if(low[u] >= disc[node] && parent != -1){
-                    ap[node] = true;
+
+                if(low[u] > disc[node]){
+                    result.add(new Edges(node, u));
                 }
-                children++;
             }else{
                 low[node] = Math.min(low[node], disc[u]);
-            }
-            if(parent == -1 && children > 1){
-                ap[node] = true;
             }
         }
     }
 
-    public List<Integer>  findArticulationPoints(int V, LinkedList<Edges> adj[]){
+    public List<Edges>  findBridge(int V, LinkedList<Edges> adj[]){
         boolean[] visited = new boolean[V];
         int[] disc = new int[V];
         int[] low = new int[V];
-        boolean[] ap = new boolean[V];
+        List<Edges> result = new ArrayList<>();
 
-        int parent = -1;
-        // Call the recursive helper function to find articulation points
+        // Call the recursive helper function to find bridge
         for(int i=1; i<V; i++){
             if(!visited[i]){
-                findArticulationPoints(adj, i, parent, visited, disc, low, ap);
+                dfs(adj,-1, i, visited, disc, low, result);
             }
         }
 
-        // Collect the articulation points
-        List<Integer> result = new ArrayList<>();
-        for(int i=0; i<V; i++){
-            if(ap[i]) result.add(i);
-        }
-
+        // Collect the bridge
         return result;
     }
 
 
     public static void main(String[] args) {
-        Graph graph = new Graph(8);
+        Graph graph = new Graph(13);
 
-        graph.addEdges(0, 1);
-        graph.addEdges(0, 2);
-        graph.addEdges(0, 3);
-        graph.addEdges(2, 3);
-        graph.addEdges(2, 4);
-        graph.addEdges(2, 5);
-        graph.addEdges(4, 6);
-        graph.addEdges(5, 6);
+        graph.addEdges(1,2);
+        graph.addEdges(1,4);
+        graph.addEdges(2,3);
+        graph.addEdges(3,4);
+        graph.addEdges(4,5);
+        graph.addEdges(5,6);
+        graph.addEdges(6,7);
+        graph.addEdges(6,9);
+        graph.addEdges(7,8);
+        graph.addEdges(8,9);
+        graph.addEdges(8,10);
+        graph.addEdges(10,11);
+        graph.addEdges(10,12);
+        graph.addEdges(11,12);
 
-        ArticulationPoint ap  = new ArticulationPoint();
-        ap.printGraph(graph.adj);
+
+        BridgeTarjansAlgo bridge = new BridgeTarjansAlgo();
+        bridge.printGraph(graph.adj);
 
         System.out.println();
-        List<Integer> artPoint = ap.findArticulationPoints(8, graph.adj);
-        if(artPoint.size() == 0){
-            System.out.println("Caution! There is no Articulation point.");
+        List<Edges> ans = bridge.findBridge(13, graph.adj);
+
+        if(ans.size() == 0){
+            System.out.println("Caution! There is no Bridge");
         }else{
-            System.out.println(artPoint);
+            for(Edges edg: ans){
+                System.out.println(edg.source+"-"+ edg.destination);
+            }
         }
     }
 }
+
