@@ -70,7 +70,6 @@ public class BridgeTarjansAlgo {
             }
         }
     }
-
     public List<Edges>  findBridge(int V, LinkedList<Edges> adj[]){
         boolean[] visited = new boolean[V];
         int[] disc = new int[V];
@@ -88,7 +87,6 @@ public class BridgeTarjansAlgo {
         return result;
     }
 
-
     public static void main(String[] args) {
         Graph graph = new Graph(13);
 
@@ -96,17 +94,18 @@ public class BridgeTarjansAlgo {
         graph.addEdges(1,4);
         graph.addEdges(2,3);
         graph.addEdges(3,4);
+        //graph.addEdges(3,6);
         graph.addEdges(4,5);
         graph.addEdges(5,6);
         graph.addEdges(6,7);
         graph.addEdges(6,9);
         graph.addEdges(7,8);
         graph.addEdges(8,9);
+        //graph.addEdges(9,10);
         graph.addEdges(8,10);
         graph.addEdges(10,11);
         graph.addEdges(10,12);
         graph.addEdges(11,12);
-
 
         BridgeTarjansAlgo bridge = new BridgeTarjansAlgo();
         bridge.printGraph(graph.adj);
