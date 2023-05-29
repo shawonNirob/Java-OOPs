@@ -90,7 +90,7 @@ public class DisjointSet {
         System.out.println(set.find(8));
 
         for(int i=1; i<9; i++){
-            System.out.println("Node of "+i+" Parrent: "+parrent[i]+" rank: "+size[i]);
+            System.out.println("Node of "+i+" parrent: "+parrent[i]+" rank: "+size[i]);
         }
     }
 }
