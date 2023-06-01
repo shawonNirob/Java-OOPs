@@ -2,10 +2,10 @@ package javaException;
 
 
 public class MultipleTryCatch {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         try{
             int a=20, c;
-            int b=2; //b=2;
+            int b=0; //b=2;
             c = a/b;
             System.out.println(c);
 
