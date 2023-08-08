@@ -5,7 +5,7 @@ public class string03 {
         //output: I love my country
         String str1 = "Country my love I";
         for(int i=0; i<str1.length(); i++){
-            if()
+
         }
 
         //output: I evol ym ytrnuoc
