@@ -13,7 +13,7 @@ public class openFile {
         try{
             System.out.println("Entered try statement: ");
 
-            PrintWriter out = new PrintWriter("fileNirob");
+            PrintWriter out = new PrintWriter("file1`");
             out.print(str);
             out.close();
             System.out.println("File creation done");

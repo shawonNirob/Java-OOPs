@@ -68,6 +68,7 @@ public class BrickBreakerGame extends JPanel implements ActionListener {
             int brickColumn = ballPositionX / BRICK_WIDTH;
             if (brickColumn >= 0 && brickColumn < WIDTH / BRICK_WIDTH) {
                 bricksVisible = false;
+                //ballDirectionY = -ballDirectionY;
             }
         }
     }
