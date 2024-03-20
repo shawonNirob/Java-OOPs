@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-public class FileChannelRead {
-    public static void main(String[] args) {
+public class FileChannelRead{
+    public static void main(String[] args){
         File inputFile  = new File("/home/shawon/Code/File/hello.txt");
 
         if(!inputFile.exists()){
@@ -20,7 +20,7 @@ public class FileChannelRead {
             FileChannel fileChannel = fis.getChannel();
 
             ByteBuffer buffer = ByteBuffer.allocate(1024);
-
+                 
             while(fileChannel.read(buffer) > 0){
                 buffer.flip();
 
